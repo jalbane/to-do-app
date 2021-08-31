@@ -1,0 +1,56 @@
+form{
+    width: 65%;
+    margin: 0 auto;
+}
+label, input{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+label{
+    text-align: left;
+}
+
+input{
+    padding-left: 25px;
+}
+
+.account-svg{
+    position: absolute;
+    float: left;
+    top: 10.8%;
+    left: 18%;
+}
+
+.password-svg{
+    position: absolute;
+    float: left;
+    top: 20%;
+    left: 18%;
+} 
+
+.submit-button{
+    background-color: blue;
+    color: white;
+    border: none;
+    width: 100%;
+    margin: 0 auto;
+}
+
+input:not(:placeholder-shown):invalid{
+    border-color: red;
+}
+
+form:invalid > .submit-button{
+    opacity: .5;
+}
+
+.error-msg{
+    height: 40px;
+    font-size: .8em;
+}
+
+.hidden-div{
+    visibility: hidden;
+    height: 40px;
+}
