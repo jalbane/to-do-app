@@ -1,45 +1,55 @@
+h2{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10%;
+    text-align: center;
+}
+
 form{
     width: 65%;
     margin: 0 auto;
+    margin-top: 10%;
 }
-label, input{
+label{
     width: 100%;
     display: block;
     box-sizing: border-box;
-}
-label{
     text-align: left;
 }
 
 input{
-    padding-left: 25px;
+    padding-left: 30px;
+    width: 100%;
+    flex-grow: 2;
+    outline: none;
 }
 
-.account-svg{
-    position: absolute;
-    float: left;
-    top: 10.8%;
-    left: 18%;
-}
-
-.password-svg{
-    position: absolute;
-    float: left;
-    top: 20%;
-    left: 18%;
+.login-input{
+    display: flex;
+    height: 40px;
 } 
 
+i{
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    padding: 9px 9px;
+}
+
 .submit-button{
-    background-color: blue;
+    background-color: black;
     color: white;
     border: none;
     width: 100%;
     margin: 0 auto;
+    height: 40px;
 }
 
-#email:not(:placeholder-shown):invalid,
-#password:not(:placeholder-shown):invalid{
-    border-color: red;
+
+#password:not(:placeholder-shown):invalid,
+#email:not(:placeholder-shown):invalid{
+    border: 2px solid red;
 }
 
 form:invalid > .submit-button{
@@ -47,11 +57,19 @@ form:invalid > .submit-button{
 }
 
 .error-msg{
-    height: 40px;
+    height: 20px;
     font-size: .8em;
+    display: block;
 }
 
 .hidden-div{
     visibility: hidden;
-    height: 40px;
+    height: 20px;
+}
+
+@media only screen and (min-width: 1023px) {
+    .login-page{
+        width: 40%;
+        margin: 0 auto;
+    }
 }

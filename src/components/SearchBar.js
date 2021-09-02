@@ -2,27 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledSearchBar = styled.input`
-    width: 80%;
-    font-size: 20px;
-    background-color: whitesmoke;
-    margin: 0;
+    font-size: 16px;
+    background-color: white;
+    width: 70%;
+    display: inline;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
 `;
 
 function SearchBar(props){
 
     function handleSearchFilter(e){
+        let getTodos = Object.values(localStorage)
+        console.log(getTodos)
+        let arr = []
         if (e.target.value === ""){
-            return props.setTodo([...props.copyTodo])
+            for (const element of getTodos){
+                arr.push( {text: element} )
+            }
+            return props.setTodo(arr)
         }
-        let tempArray = props.todo.slice();
-        tempArray = tempArray.filter(item => item.text.includes(e.target.value.toLowerCase()))
-        props.setTodo(tempArray)
+
+        for (const element of getTodos){
+            if (element.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())){
+                arr.push( {text: element} )
+            }
+        }    
+        props.setTodo(arr)
     }
 
     return(
-        <div>
-            <StyledSearchBar required type="text" placeholder="Search" onChange={(e) => handleSearchFilter(e)}></StyledSearchBar>
-        </div>
+        <StyledSearchBar required type="text" placeholder="Search" onChange={(e) => handleSearchFilter(e)}></StyledSearchBar>
     )
 }
 

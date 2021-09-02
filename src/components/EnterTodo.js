@@ -1,13 +1,59 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
+import Delete from '../icons/Delete';
+import Edit from '../icons/Edit';
+import '../styles/EnterTodo.css'
 
 const Form = styled.form`
-    width: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 1%;
+    outline: 1px black solid;
+    font: font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
 
-const Todo = styled.div`
-    width: 20%;
-    margin: 0 auto;
+const FormButton = styled.button`
+    width: 15%;
+    padding: 0;
+    height: 20px;
+    float: right;
+    display: inline;
+    background-color: transparent;
+    border: none;
+    transition: 500ms;
+    &:hover{
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
+`;
+
+const InputTodo = styled.input`
+    flex-grow: 2;
+    border: none;
+    font-size: 16px;
+    padding: 0px;
+`;
+
+const SaveButton = styled.button `
+    background-color: black;
+    color: white;
+    width: 42%;
+    border: none;
+    &:active{
+        color: black;
+        background-color: white;
+    }
+`;
+
+const TodoWrapper = styled.div `
+    background-color: red;
+    @media only screen and (min-width: 1024px) {
+        width: 40%;
+        margin: 0 auto; 
+    }
 `;
 
 function EnterTodo(props){
@@ -19,27 +65,32 @@ function EnterTodo(props){
         let tempArray = props.todo.slice()
         tempArray.splice(props.index, 1, {text: value})
         props.setTodo(tempArray)
-        props.setCopyTodo(tempArray)
         setEditState(true);
-        document.getElementById('Todotext').readOnly = true;
-        localStorage.setItem(value, new Date())
+        localStorage.setItem(Date.now(), value)
     }
 
     function handleDelete(e){
         let tempArray = props.todo.slice() //copy the Todo array
         tempArray.splice(props.index, 1) //remove the index from the array
+        let tempKeyName = localStorage.key(props.index) //hold the deleted Todos key from localstorage
         props.setTodo(tempArray)        //set state
-        props.setCopyTodo(tempArray)    //set state of a copy to use for the Search functionality
-        localStorage.removeItem(props.text) //remove the Todo from local storage
+        localStorage.removeItem(tempKeyName)  //remove key from local storage
     }
 
     function updateEditState(e){
         setEditState(false) //change state to display an input field to edit the todo.
     }
 
+    function handleInputFieldChange(e){
+        
+        setValue(e.target.value); 
+        let tempKeyName = localStorage.key(props.index)
+        localStorage.removeItem(tempKeyName)
+    }
+
     function EditTodo(){
         return(
-            <button onClick={(e)=>{updateEditState(e)}}> Edit </button>
+            <FormButton onClick={(e)=>{updateEditState(e)}}><Edit/></FormButton>
         )
     }
 
@@ -47,14 +98,14 @@ function EnterTodo(props){
         <div>
            {props.text === null || editState === false
             ? <Form action="" onSubmit={(e) => handleTodoSubmission(e) }>
-                <input required onChange={(e) => setValue(e.target.value)}id="Todotext" type ="text" pattern="[A-Za-z0-9_ ]{1,}" defaultValue={props.text}></input>
-                <button className = "save-todo" type="submit"> Save </button>
+                <InputTodo required onChange={(e) => handleInputFieldChange(e)} id="Todotext" type ="text" pattern="[A-Za-z0-9_ ]{1,25}" maxLength="25" defaultValue={props.text}></InputTodo>
+                <SaveButton className = "save-todo" type="submit"> Save </SaveButton>
             </Form>
-            : <Todo>
+            : <div className="MainTodo">
                 {props.text}
-                <EditTodo  /> 
-                <button onClick={e => handleDelete(e)}> Delete </button>
-            </Todo>
+                <FormButton onClick={e => handleDelete(e)}><Delete /></FormButton>
+                <EditTodo  />
+            </div>
             }
         </div>
     )

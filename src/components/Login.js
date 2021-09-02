@@ -1,6 +1,7 @@
 import {React, useState} from 'react';
 import '../styles/login.css';
-import { VscAccount, VscLock } from "react-icons/vsc";
+import Account from '../icons/Account';
+import Password from '../icons/Password';
 import {useHistory} from "react-router-dom";
 
 function Login(props){
@@ -75,19 +76,18 @@ function Login(props){
           .catch(error => window.alert('error', error)
         );
         document.getElementsByTagName('button')[0].disabled = false;
-
     }
 
     return(
-        <div> 
+        <div className="login-page"> 
             <h2> 
                 Rapptr Labs
             </h2>
             <form method = "POST" onSubmit={handleSubmit}>
-                <label htmlFor = "email">Email
-                    
-                    <i className = "account-svg">
-                        <VscAccount />
+                <label htmlFor = "email">Email</label>
+                <div className ="login-input">
+                    <i>
+                        <Account />
                     </i>
                     <input required type = "email" 
                         id ="email"
@@ -97,14 +97,14 @@ function Login(props){
                         min = "4"
                         onChange={handleEmailChange}> 
                     </input>
-                    {/* Conditional rendering based on the presence or absence of validation errors */}
-                    {showEmailError ? <div className ="error-msg"> Not a valid email </div>: <div className ="hidden-div"> </div>} 
-                </label>
-
-                <label htmlFor = "password">
-                    Password
+                </div>    
+                {/* Conditional rendering based on the presence or absence of validation errors */}
+                {showEmailError ? <div className ="error-msg"> Not a valid email </div>: <div className ="hidden-div"> </div>} 
+                
+                <label htmlFor = "password">Password</label>
+                <div className="login-input">
                     <i className = "password-svg">
-                        <VscLock />
+                        <Password />
                     </i>
                     <input required type = "password" 
                         name="password"
@@ -114,9 +114,10 @@ function Login(props){
                         maxLength="16"
                         minLength="4">
                     </input>
-                    {/* Conditional rendering based on the presence or absence of validation errors */}
-                    {showPasswordError ? <div className ="error-msg"> Password must be 4-16 characters in length </div>:  <div className ="hidden-div"> </div>} 
-                </label>
+                </div>    
+                {/* Conditional rendering based on the presence or absence of validation errors */}
+                {showPasswordError ? <div className ="error-msg"> Password must be 4-16 characters in length </div>:  <div className ="hidden-div"> </div>} 
+                
                 <button type="submit" className="submit-button" > Login </button>
             </form>
         </div>

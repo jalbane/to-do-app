@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AddTodoButton = styled.button`
-
-    width: 20%;
+    width: 15%;
+    margin-left: 5%;
+    font-size: 16px;
+    background-color: black;
+    border: none;
+    color: white;
 `;
 
 function NewTodo(props){
@@ -15,7 +19,6 @@ function NewTodo(props){
         let tempArray = props.todo;
         tempArray = [...tempArray, obj]
         props.setTodo(tempArray)
-        props.setCopyTodo(tempArray)
     }
 
     return (
