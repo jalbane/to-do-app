@@ -1,13 +1,13 @@
 import {React, useState} from 'react';
 import '../styles/login.css';
 import { VscAccount, VscLock } from "react-icons/vsc";
+import {useHistory} from "react-router-dom";
 
-function Login(){
-
+function Login(props){
     //Boolean flags for showing/hiding input validation error messages.
     const [showEmailError, setShowEmailError] = useState(null)
     const [showPasswordError, setShowPasswordError] = useState(null)
-
+    let history = useHistory();
     /*
     This function handles input validation on the Email field
     and changes state to show/hide error messages.
@@ -49,9 +49,10 @@ function Login(){
     function handleSubmit(e){
         e.preventDefault();
 
+        document.getElementsByTagName('button')[0].disabled = true;
         var formdata = new FormData();
-        formdata.append("email", "test@rapptrlabs.com");
-        formdata.append("password", "Test123");
+        formdata.append("email", document.getElementById('email').value);
+        formdata.append("password", document.getElementById('password').value);
         
         var requestOptions = {
           method: 'POST',
@@ -60,9 +61,21 @@ function Login(){
         };
         
         fetch("http://dev.rapptrlabs.com/Tests/scripts/user-login.php", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
+          .then(response => response.json())
+          .then(data => {
+              if(data.code === "Error"){
+                  alert(data.message);
+              }
+              if(data.user_is_active === 1){
+                props.setLoggedIn(true)
+                history.push('/home')
+              }
+          })
+          
+          .catch(error => window.alert('error', error)
+        );
+        document.getElementsByTagName('button')[0].disabled = false;
+
     }
 
     return(

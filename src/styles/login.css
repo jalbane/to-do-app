@@ -37,7 +37,8 @@ input{
     margin: 0 auto;
 }
 
-input:not(:placeholder-shown):invalid{
+#email:not(:placeholder-shown):invalid,
+#password:not(:placeholder-shown):invalid{
     border-color: red;
 }
 
