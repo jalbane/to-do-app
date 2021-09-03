@@ -27,11 +27,9 @@ function NewTodo(props){
      */
     function handleClick(e){
         e.preventDefault();
-        let obj ={
-            text: null
-        }
+        let string = null
         let tempArray = props.todo;
-        tempArray = [...tempArray, obj]
+        tempArray = [...tempArray, string]
         props.setTodo(tempArray)
     }
 

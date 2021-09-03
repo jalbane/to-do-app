@@ -34,6 +34,8 @@ const InputTodo = styled.input`
     border: none;
     font-size: 16px;
     padding: 0px;
+    height: 32px;
+    padding-left: 15px
 `;
 
 const SaveButton = styled.button `
@@ -71,32 +73,44 @@ function EnterTodo(props){
     function handleTodoSubmission(e){
         e.preventDefault();
         let tempArray = props.todo.slice()
-        tempArray.splice(props.index, 1, {text: value})
+        if (value === null || value === undefined){
+            tempArray.splice(props.index, 1, props.text)
+            props.setTodo(tempArray)
+            localStorage.setItem(Date.now(), props.text)
+            console.log('problem', value)
+        }
+        tempArray.splice(props.index, 1, value)
         props.setTodo(tempArray)
-        setEditState(true);
         localStorage.setItem(Date.now(), value)
+        setEditState(true);
     
     }
 
     /** Event listener for deleting a todo.
      * Deletes selected task from state and local storage.
-     * @param {*} e - onClick Event
      */
-    function handleDelete(e){
-        let tempArray = props.todo.slice() //copy the Todo array
-        tempArray.splice(props.index, 1) //remove the index from the array
-        let tempKeyName = localStorage.key(props.index) //hold the deleted Todos key from localstorage
-        props.setTodo(tempArray)        //set state
-        localStorage.removeItem(tempKeyName)  //remove key from local storage
+    function handleDelete(){
+        alterDataByKeyValue();
+        let tempArray = Object.values(localStorage)
+        props.setTodo(tempArray)
     }
 
     /** Event listener for updating this components Edit state.
      * Toggles editState between true/false for conditional rendering below.
-     * @param {*} e - onClick Event
      */
 
-    function updateEditState(e){
-        setEditState(false) //change state to display an input field to edit the todo.
+    function updateEditState(){
+        setEditState(false)
+        let tempKeyName = Object.keys(localStorage)
+        let searchForKeyFromLS
+
+        for (const element of tempKeyName){
+            if (localStorage.getItem(element) === props.text){
+                searchForKeyFromLS = element
+            }
+        }
+        
+        localStorage.removeItem(searchForKeyFromLS)
     }
 
     /** Event listener for updating state this components text value state.
@@ -106,8 +120,21 @@ function EnterTodo(props){
      */
     function handleInputFieldChange(e){
         setValue(e.target.value); 
-        let tempKeyName = localStorage.key(props.index)
-        localStorage.removeItem(tempKeyName)
+    }
+    /**
+     * 
+     */
+    function alterDataByKeyValue(){
+        let tempKeyName = Object.keys(localStorage)
+        let searchForKeyFromLS
+
+        for (const element of tempKeyName){
+            if (localStorage.getItem(element) === props.text){
+                searchForKeyFromLS = element
+            }
+        }
+        
+        localStorage.removeItem(searchForKeyFromLS)
     }
     /**Edit button for individual todo items.
      * 
@@ -115,7 +142,7 @@ function EnterTodo(props){
      */
     function EditTodo(){
         return(
-            <FormButton onClick={(e)=>{updateEditState(e)}}><Edit/></FormButton>
+            <FormButton onClick={(e)=>{updateEditState()}}><Edit/></FormButton>
         )
     }
 
@@ -128,7 +155,7 @@ function EnterTodo(props){
             </Form>
             : <div className="MainTodo">
                 {props.text}
-                <FormButton onClick={e => handleDelete(e)}><Delete /></FormButton>
+                <FormButton onClick={e => handleDelete()}><Delete /></FormButton>
                 <EditTodo  />
             </div>
             }

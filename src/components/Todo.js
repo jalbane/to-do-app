@@ -37,7 +37,7 @@ function Todo(props){
         let getTodos = Object.values(localStorage)
         let arr = []
         for (const element of getTodos){
-            arr.push( new Object({text: element}) )
+            arr.push( element )
         }
         setTodo(arr)
     },[])
@@ -56,7 +56,7 @@ function Todo(props){
                     
                 {todo.map( (item, index )=> {
                     return (<EnterTodo 
-                        text={item.text}
+                        text={item}
                         todo = {todo}
                         index ={index}
                         key = {index}

@@ -27,14 +27,14 @@ function SearchBar(props){
         let arr = []
         if (e.target.value === ""){
             for (const element of getTodos){
-                arr.push( {text: element} )
+                arr.push(  element)
             }
             return props.setTodo(arr)
         }
 
         for (const element of getTodos){
             if (element.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())){
-                arr.push( {text: element} )
+                arr.push( element )
             }
         }    
         props.setTodo(arr)
