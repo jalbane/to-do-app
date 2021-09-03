@@ -3,11 +3,15 @@ import styled from 'styled-components';
 
 const AddTodoButton = styled.button`
     width: 15%;
-    margin-left: 5%;
+    margin-left: 0%;
     font-size: 16px;
     background-color: black;
     border: none;
+    height: 24px;
     color: white;
+    @media only screen and (min-width: 769px) {
+        margin-left: 2%;
+    }
 `;
 
 /** Add new todo component

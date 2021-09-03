@@ -9,7 +9,6 @@ const Form = styled.form`
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    margin-top: 1%;
     outline: 1px black solid;
     font: font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
@@ -76,6 +75,7 @@ function EnterTodo(props){
         props.setTodo(tempArray)
         setEditState(true);
         localStorage.setItem(Date.now(), value)
+    
     }
 
     /** Event listener for deleting a todo.

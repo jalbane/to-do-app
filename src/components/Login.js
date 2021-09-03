@@ -79,7 +79,7 @@ function Login(props){
                 props.setLoggedIn(true);
                 setShowServerError(false);
                 setServerErrorMessage(null)
-                history.push('/home')
+                history.push('/list')
               }
           })
           .catch( error => {alert(error)})

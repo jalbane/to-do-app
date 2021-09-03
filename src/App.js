@@ -12,8 +12,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path = "/" component={() => <Login setLoggedIn={setLoggedIn}/>}></Route>
-          <Route exact path = "/home" component={() => <Todo loggedin={loggedIn} setLoggedIn={setLoggedIn}/>}></Route>
-          {/*loggedIn? <Route exact path = "/home" component={() => <Todo loggedin={loggedIn} setLoggedIn={setLoggedIn}/>}></Route> : <ProtectedRoute/>*/}
+          <Route exact path = "/list" component={() => <Todo loggedin={loggedIn} setLoggedIn={setLoggedIn}/>}></Route>
+          {/*loggedIn? <Route exact path = "/list" component={() => <Todo loggedin={loggedIn} setLoggedIn={setLoggedIn}/>}></Route> : <ProtectedRoute/>*/}
         </Switch>
       </div>
     </BrowserRouter>
