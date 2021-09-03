@@ -21,7 +21,11 @@ const LogoutButton = styled.button `
     }
     
 `;
-
+/**
+ * 
+ * @param {*} props - setLoggedIn hook for toggling log in state.
+ * @returns - Renders a logout button for user interaction and returns user to home page onClick.
+ */
 function Logout(props){
     let history = useHistory()
     return (

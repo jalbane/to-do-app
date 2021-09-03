@@ -8,6 +8,8 @@ function Login(props){
     //Boolean flags for showing/hiding input validation error messages.
     const [showEmailError, setShowEmailError] = useState(null)
     const [showPasswordError, setShowPasswordError] = useState(null)
+    const [showServerError, setShowServerError] = useState(null)
+    const [serverError, setServerErrorMessage] = useState('')
     let history = useHistory();
     /*
     This function handles input validation on the Email field
@@ -46,7 +48,11 @@ function Login(props){
         // else update State to false (hides error message).
         return setShowPasswordError(false)
     }
-
+    /** onSubmit event handler
+     * Prepares an HTTP request to post to server for logging in.
+     * Form submission is disabled while waiting for response.
+     * @param {*} e - Event
+     */
     function handleSubmit(e){
         e.preventDefault();
 
@@ -65,16 +71,18 @@ function Login(props){
           .then(response => response.json())
           .then(data => {
               if(data.code === "Error"){
-                  alert(data.message);
+                  setShowServerError(true)
+                  setServerErrorMessage(data.message)
+                  props.setLoggedIn(false)
               }
               if(data.user_is_active === 1){
-                props.setLoggedIn(true)
+                props.setLoggedIn(true);
+                setShowServerError(false);
+                setServerErrorMessage(null)
                 history.push('/home')
               }
           })
-          
-          .catch(error => window.alert('error', error)
-        );
+          .catch( error => {alert(error)})
         document.getElementsByTagName('button')[0].disabled = false;
     }
 
@@ -119,6 +127,7 @@ function Login(props){
                 {showPasswordError ? <div className ="error-msg"> Password must be 4-16 characters in length </div>:  <div className ="hidden-div"> </div>} 
                 
                 <button type="submit" className="submit-button" > Login </button>
+                {showServerError ? <div className = "error-msg"> {serverError}</div> : <div className ="hidden-div"></div>}
             </form>
         </div>
     )

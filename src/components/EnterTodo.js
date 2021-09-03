@@ -56,10 +56,19 @@ const TodoWrapper = styled.div `
     }
 `;
 
+/** EnterTodo component
+ * Users will mainly be interacting with this component for creation, updates and deletion of todo tasks.
+ * @param {*} props - text, todo, index, key, setTodo
+ * @returns 
+ */   
 function EnterTodo(props){
     const [editState, setEditState] = useState(null)
     const [value, setValue] = useState()
 
+    /** Submit event listener for submitting a todo.
+     * Updates state and localstorage.
+     * @param {*} e - onSubmit Event 
+     */
     function handleTodoSubmission(e){
         e.preventDefault();
         let tempArray = props.todo.slice()
@@ -69,6 +78,10 @@ function EnterTodo(props){
         localStorage.setItem(Date.now(), value)
     }
 
+    /** Event listener for deleting a todo.
+     * Deletes selected task from state and local storage.
+     * @param {*} e - onClick Event
+     */
     function handleDelete(e){
         let tempArray = props.todo.slice() //copy the Todo array
         tempArray.splice(props.index, 1) //remove the index from the array
@@ -77,17 +90,29 @@ function EnterTodo(props){
         localStorage.removeItem(tempKeyName)  //remove key from local storage
     }
 
+    /** Event listener for updating this components Edit state.
+     * Toggles editState between true/false for conditional rendering below.
+     * @param {*} e - onClick Event
+     */
+
     function updateEditState(e){
         setEditState(false) //change state to display an input field to edit the todo.
     }
 
+    /** Event listener for updating state this components text value state.
+     * On text change deletes the current todo from local storage.
+     * When user submits the form todo text value updates and pushes it to local storage.
+     * @param {*} e - onChange event
+     */
     function handleInputFieldChange(e){
-        
         setValue(e.target.value); 
         let tempKeyName = localStorage.key(props.index)
         localStorage.removeItem(tempKeyName)
     }
-
+    /**Edit button for individual todo items.
+     * 
+     * @returns Renders an edit button after a todo item has been submitted.
+     */
     function EditTodo(){
         return(
             <FormButton onClick={(e)=>{updateEditState(e)}}><Edit/></FormButton>

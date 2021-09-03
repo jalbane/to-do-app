@@ -10,9 +10,17 @@ const StyledSearchBar = styled.input`
     margin-bottom: 15px;
 
 `;
-
+/**
+ * 
+ * @param {*} props - setTodo, todo
+ * @returns 
+ */
 function SearchBar(props){
-
+    /** onChange event listener
+     *  
+     * @param {*} e - Event 
+     * @returns 
+     */
     function handleSearchFilter(e){
         let getTodos = Object.values(localStorage)
         console.log(getTodos)

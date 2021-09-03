@@ -6,6 +6,7 @@ import EnterTodo from './EnterTodo.js'; //User input, updates list on saving
 import SearchBar from './SearchBar.js';
 import styled from 'styled-components';
 import '../styles/Todo.css'
+import { useHistory } from 'react-router-dom';
 
 const MainTodoDisplay = styled.div`
     width: 80%;
@@ -28,10 +29,10 @@ const MainTodoDisplay = styled.div`
 
 `;
 
+/* Landing page component after successful login */
 function Todo(props){
     const [todo, setTodo] = useState([])
-
-
+    let history = useHistory();
     useEffect(()=> {
         let getTodos = Object.values(localStorage)
         let arr = []
@@ -42,7 +43,8 @@ function Todo(props){
     },[])
 
     return(
-        <div className = 'home-page'>            
+        <div className = 'home-page'>
+            {/*!props.loggedIn ? history.push('/'): null*/}            
             <Logout setLoggedIn={props.setLoggedIn}/>
             <h2>My To-Do List</h2>
             <MainTodoDisplay>

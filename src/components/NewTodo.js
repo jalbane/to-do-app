@@ -10,7 +10,17 @@ const AddTodoButton = styled.button`
     color: white;
 `;
 
+/** Add new todo component
+ * 
+ * @param {*} props - todo, setTodo
+ * @returns - Renders a button for user to click to add todos to list. 
+ */
 function NewTodo(props){
+    /**onClick event listener
+     * Pushes a new index onto the todo array with empty text value.
+     * Since the size of the array has updated another EnterTodo component will render.
+     * @param {*} e - Event 
+     */
     function handleClick(e){
         e.preventDefault();
         let obj ={
