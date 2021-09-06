@@ -1,6 +1,6 @@
 .MainTodo{
     background-color: transparent;
     text-align: left;
-    padding: 5px 15px;
-    border-top: solid black 1px;
+    padding: 15px 15px;
+    border-bottom: 1px black solid;
 }

@@ -33,27 +33,24 @@ const InputTodo = styled.input`
     flex-grow: 2;
     border: none;
     font-size: 16px;
-    padding: 0px;
-    height: 32px;
-    padding-left: 15px
+    width: 60%;
+    padding: 15px 15px;
+    font-family: inherit;
+    background-color: transparent;
 `;
 
 const SaveButton = styled.button `
     background-color: black;
     color: white;
-    width: 42%;
+    width: 28.5%;
+    height: 30px;
+    margin: auto;
+    margin-right: 2%;
+    padding: 0px;
     border: none;
     &:active{
         color: black;
         background-color: white;
-    }
-`;
-
-const TodoWrapper = styled.div `
-    background-color: red;
-    @media only screen and (min-width: 1024px) {
-        width: 40%;
-        margin: 0 auto; 
     }
 `;
 

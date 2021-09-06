@@ -2,18 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AddTodoButton = styled.button`
-    width: 15%;
-    margin-left: 0%;
+    width: 30%;
     font-size: 16px;
+    margin-left: 5%;
     background-color: black;
     border: none;
-    height: 24px;
+    height: 30px;
     color: white;
+    padding: 0px;
     &:hover{
         cursor: pointer;
-    }
-    @media only screen and (min-width: 769px) {
-        margin-left: 2%;
     }
 `;
 

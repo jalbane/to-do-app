@@ -1,14 +1,31 @@
 import React from 'react';
+import Search from '../icons/Search.js'
 import styled from 'styled-components';
 
-const StyledSearchBar = styled.input`
+const Input = styled.input`
     font-size: 16px;
-    background-color: white;
-    width: 70%;
+    background-color: transparent;
     display: inline;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    padding: 0px;
+    outline: none;
+    border: none;
+`;
 
+const SearchBarIcon = styled.i `
+    position: relative;
+    top: -4px;
+`
+const MainSearchBar = styled.div `
+    box-sizing: border-box;
+    border: black 1px solid;
+    border-radius: 15px;
+    background-color: white;
+    width: 65%;
+    display: inline-flex;
+    height: 30px;
+    &:hover{
+        cursor: text;
+    }
 `;
 /**
  * 
@@ -19,7 +36,7 @@ function SearchBar(props){
     /** onChange event listener
      *  
      * @param {*} e - Event 
-     * @returns 
+     * @returns renders the Search bar input field and magnifying glass icon.
      */
     function handleSearchFilter(e){
         let getTodos = Object.values(localStorage)
@@ -40,7 +57,10 @@ function SearchBar(props){
     }
 
     return(
-        <StyledSearchBar required type="text" placeholder="Search" onChange={(e) => handleSearchFilter(e)}></StyledSearchBar>
+        <MainSearchBar >
+            <SearchBarIcon> <Search /> </SearchBarIcon>
+            <Input required type="text" placeholder="Search" onChange={(e) => handleSearchFilter(e)}></Input>
+        </MainSearchBar>
     )
 }
 

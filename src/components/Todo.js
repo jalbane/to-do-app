@@ -6,7 +6,6 @@ import EnterTodo from './EnterTodo.js'; //User input, updates list on saving
 import SearchBar from './SearchBar.js';
 import styled from 'styled-components';
 import '../styles/Todo.css'
-import { useHistory } from 'react-router-dom';
 
 const MainTodoDisplay = styled.div`
     width: 80%;
@@ -15,7 +14,6 @@ const MainTodoDisplay = styled.div`
     border-radius: 5px;
     background-color: whitesmoke;
     box-shadow: 2px 2px 5px;
-    margin-top: 1%;
     @media only screen and (min-width: 769px) {
         width: 60%;
     }
@@ -27,28 +25,21 @@ const MainTodoDisplay = styled.div`
     }
 `;
 
-const Span = styled.span`
+const TodoList = styled.span`
     width: 100%;
-    height: 300px;
+    height: 315px;
     overflow-y: auto;
     display: block;
     background-color: white;
+    border-bottom: solid 1px black;
     & > div:nth-child(2n){
         background-color: whitesmoke;
     }    
-    & > div:last-child{
-        border-bottom: solid 1px black;
-    }
-    padding-bottom: 1px;
-    & > div:hover{
-        transform: scaleY(1.01);
-    }
 `;
 
 /* Landing page component after successful login */
 function Todo(props){
     const [todo, setTodo] = useState([])
-    let history = useHistory();
     useEffect(()=> {
         let getTodos = Object.values(localStorage)
         let arr = []
@@ -67,9 +58,9 @@ function Todo(props){
                 
                 <div className="search-bar">
                     <SearchBar todo={todo} setTodo ={setTodo} />
-                    <NewTodo setTodo={setTodo} todo={todo}/>
+                    <NewTodo todo={todo} setTodo={setTodo} />
                 </div>
-                <Span>
+                <TodoList>
                 {todo.map( (item, index )=> {
                     return (<EnterTodo 
                         text={item}
@@ -80,7 +71,7 @@ function Todo(props){
                     />)
                 })
                 }
-                </Span>
+                </TodoList>
             </MainTodoDisplay>
         </div>
     )

@@ -9,7 +9,7 @@ function Login(props){
     const [showEmailError, setShowEmailError] = useState(null)
     const [showPasswordError, setShowPasswordError] = useState(null)
     const [showServerError, setShowServerError] = useState(null)
-    const [serverError, setServerErrorMessage] = useState('')
+    const [serverError, setServerErrorMessage] = useState('') //contains message to display on server error
     let history = useHistory();
     /*
     This function handles input validation on the Email field
