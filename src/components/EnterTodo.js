@@ -73,12 +73,6 @@ function EnterTodo(props){
     function handleTodoSubmission(e){
         e.preventDefault();
         let tempArray = props.todo.slice()
-        if (value === null || value === undefined){
-            tempArray.splice(props.index, 1, props.text)
-            props.setTodo(tempArray)
-            localStorage.setItem(Date.now(), props.text)
-            console.log('problem', value)
-        }
         tempArray.splice(props.index, 1, value)
         props.setTodo(tempArray)
         localStorage.setItem(Date.now(), value)
@@ -101,16 +95,8 @@ function EnterTodo(props){
 
     function updateEditState(){
         setEditState(false)
-        let tempKeyName = Object.keys(localStorage)
-        let searchForKeyFromLS
-
-        for (const element of tempKeyName){
-            if (localStorage.getItem(element) === props.text){
-                searchForKeyFromLS = element
-            }
-        }
-        
-        localStorage.removeItem(searchForKeyFromLS)
+        setValue(props.text)
+        alterDataByKeyValue();
     }
 
     /** Event listener for updating state this components text value state.

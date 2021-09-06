@@ -23,7 +23,6 @@ function SearchBar(props){
      */
     function handleSearchFilter(e){
         let getTodos = Object.values(localStorage)
-        console.log(getTodos)
         let arr = []
         if (e.target.value === ""){
             for (const element of getTodos){
