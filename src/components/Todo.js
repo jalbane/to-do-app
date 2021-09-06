@@ -25,8 +25,24 @@ const MainTodoDisplay = styled.div`
     @media only screen and (min-width: 1279px) {
         width: 30%;
     }
+`;
 
-
+const Span = styled.span`
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    display: block;
+    background-color: white;
+    & > div:nth-child(2n){
+        background-color: whitesmoke;
+    }    
+    & > div:last-child{
+        border-bottom: solid 1px black;
+    }
+    padding-bottom: 1px;
+    & > div:hover{
+        transform: scaleY(1.01);
+    }
 `;
 
 /* Landing page component after successful login */
@@ -53,7 +69,7 @@ function Todo(props){
                     <SearchBar todo={todo} setTodo ={setTodo} />
                     <NewTodo setTodo={setTodo} todo={todo}/>
                 </div>
-                    
+                <Span>
                 {todo.map( (item, index )=> {
                     return (<EnterTodo 
                         text={item}
@@ -64,6 +80,7 @@ function Todo(props){
                     />)
                 })
                 }
+                </Span>
             </MainTodoDisplay>
         </div>
     )

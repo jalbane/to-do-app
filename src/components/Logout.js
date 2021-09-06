@@ -15,6 +15,9 @@ const LogoutButton = styled.button `
     position: relative;
     margin-top: 1%;
     padding: 0px;
+    &:hover{
+        cursor: pointer;
+    }
     @media only screen and (min-width: 1023px) {
         width: 10%;
         left: 89%;

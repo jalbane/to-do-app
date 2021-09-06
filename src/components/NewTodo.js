@@ -9,6 +9,9 @@ const AddTodoButton = styled.button`
     border: none;
     height: 24px;
     color: white;
+    &:hover{
+        cursor: pointer;
+    }
     @media only screen and (min-width: 769px) {
         margin-left: 2%;
     }

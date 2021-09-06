@@ -1,7 +1,10 @@
+.login-page{
+    margin-top: 10%;
+}
+
 h2{
     width: 50%;
     margin: 0 auto;
-    margin-top: 10%;
     text-align: center;
 }
 
@@ -44,6 +47,8 @@ i{
     width: 100%;
     margin: 0 auto;
     height: 40px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 
@@ -54,6 +59,7 @@ i{
 
 form:invalid > .submit-button{
     opacity: .5;
+    cursor: not-allowed;
 }
 
 .error-msg{
@@ -71,5 +77,13 @@ form:invalid > .submit-button{
     .login-page{
         width: 40%;
         margin: 0 auto;
+        margin-top: 5%;
     }
+    form{
+        margin-top: 5%;
+    }
+}
+
+.submit-button{
+    margin-top: 20px;
 }
