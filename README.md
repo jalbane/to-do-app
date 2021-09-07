@@ -1,4 +1,4 @@
-List of the tasks that I thought consumed the most amount, to least amount of time below:
+List of the tasks that I thought consumed the most amount, to least amount of time below
 
     - I spent most of my time fixing bigs and thinking of a good solution for nesting components/state management. I encountered a lot of bugs when trying to edit or delete to-do tasks that were returned from filtering the to-dos via the search bar.
 
