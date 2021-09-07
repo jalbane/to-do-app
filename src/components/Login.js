@@ -6,9 +6,9 @@ import {useHistory} from "react-router-dom";
 
 function Login(props){
     //Boolean flags for showing/hiding input validation error messages.
-    const [showEmailError, setShowEmailError] = useState(null)
-    const [showPasswordError, setShowPasswordError] = useState(null)
-    const [showServerError, setShowServerError] = useState(null)
+    const [showEmailError, setShowEmailError] = useState()
+    const [showPasswordError, setShowPasswordError] = useState()
+    const [showServerError, setShowServerError] = useState()
     const [serverError, setServerErrorMessage] = useState('') //contains message to display on server error
     let history = useHistory();
     /*
@@ -21,11 +21,12 @@ function Login(props){
             return setShowEmailError(false)
         }
         //Set the regular expression for a valid email.
-        const checkValidInput = new RegExp (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        const checkValidInput = new RegExp (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/);
         // if the input is invalid update State to true (displays the error message).
         if (!checkValidInput.test(e.target.value)){
             return setShowEmailError(true)
         }
+        
         // else update State to false (hides error message).
         return setShowEmailError(false)
     }
@@ -55,8 +56,7 @@ function Login(props){
      */
     function handleSubmit(e){
         e.preventDefault();
-
-        document.getElementsByTagName('button')[0].disabled = true;
+        document.getElementsByClassName('submit-button')[0].disabled = true;
         var formdata = new FormData();
         formdata.append("email", document.getElementById('email').value);
         formdata.append("password", document.getElementById('password').value);
@@ -68,8 +68,8 @@ function Login(props){
         };
         
         fetch("http://dev.rapptrlabs.com/Tests/scripts/user-login.php", requestOptions)
-          .then(response => response.json())
-          .then(data => {
+            .then(response => response.json())
+            .then(data => {
               if(data.code === "Error"){
                   setShowServerError(true)
                   setServerErrorMessage(data.message)
@@ -81,9 +81,9 @@ function Login(props){
                 setServerErrorMessage(null)
                 history.push('/list')
               }
-          })
-          .catch( error => {alert(error)})
-        document.getElementsByTagName('button')[0].disabled = false;
+            })
+            .catch( error => {alert(error)})
+        document.getElementsByClassName('submit-button')[0].disabled = false;
     }
 
     return(
@@ -91,7 +91,7 @@ function Login(props){
             <h2> 
                 Rapptr Labs
             </h2>
-            <form method = "POST" onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {handleSubmit(e)}}>
                 <label htmlFor = "email">Email</label>
                 <div className ="login-input">
                     <i>
@@ -101,6 +101,7 @@ function Login(props){
                         id ="email"
                         name="email"
                         placeholder = "user@rapptrlabs.com" 
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         maxLength="50" 
                         min = "4"
                         onChange={handleEmailChange}> 
@@ -126,8 +127,8 @@ function Login(props){
                 {/* Conditional rendering based on the presence or absence of validation errors */}
                 {showPasswordError ? <div className ="error-msg"> Password must be 4-16 characters in length </div>:  <div className ="hidden-div"> </div>} 
                 
-                <button type="submit" className="submit-button" > Login </button>
-                {showServerError ? <div className = "error-msg"> {serverError}</div> : <div className ="hidden-div"></div>}
+                <input type="submit" value="Login" className="submit-button" ></input>
+                {showServerError ? <div className = "error-msg"> {serverError} </div> : <div className ="hidden-div"></div>}
             </form>
         </div>
     )

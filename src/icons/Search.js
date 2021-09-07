@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledSvg = styled.svg`
+    height: 20px;
+    width: 20px;
+    padding: 0px 0px 0px 0px;
+`;
+
 function Search(){
 
-    const StyledSvg = styled.svg`
-        height: 20px;
-        width: 20px;
-        padding: 0px 0px 0px 0px;
-    `;
+
 
     return(
         <StyledSvg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
